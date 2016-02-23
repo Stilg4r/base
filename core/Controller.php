@@ -54,33 +54,17 @@ class Controller extends Application {
 	 * @param  array  $vars      Array que contenga las variables de la vita 
 	 * @param  string $template  Template 
 	 */
-	protected function render($view_name, $mesaje=null, $type=null, $vars=null, $template=null){
+	protected function render($view_name, $vars=null, $template=null){
 		if (!is_null($vars)) {
 			foreach($vars as $var => $value) {
     			$this->view->set($var,$value);
 			}
 		}
-		if(!is_null($mesaje)){
-			if (is_null($type)){
-				$this->view->set_alert($mesaje);
-			}else{
-				$this->view->set_alert($mesaje,$type);
-			}
-		}
-
 		if (is_null($template)){
 			$this->view->render($view_name);
 		}else{
 			$this->view->render($view_name,$template);
 		}
-	}
-	/**
-	 * Wrapper para mostara alertas
-	 * @param  string $mesaje Mensaje a mostrar
-	 * @param  string $type   Tipo de alerta
-	 */
-	protected function alert($mesaje,$type='info'){
-		$this->view->set_alert($mesaje,$type);
 	}
 	/**
 	 * Wrapper para poner variables en la vista
