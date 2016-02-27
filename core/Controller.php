@@ -26,17 +26,19 @@ class Controller extends Application {
         	require_once(ROOT.DS.'application'.DS.'controllers'.DS.'helpers'.DS.strtolower(get_class($this)).'.php');
     	}
 	}
-	public function checkToken($formName,$f){
-		if ( empty( $_POST['CSRFToken'] ) ) {
+
+	protected function jsonResponce($data,$code=200){
+		http_response_code($code);
+		header('Content-Type: application/json');
+		echo json_encode($data);
+		exit();
+	}
+	protected function checkToken($Token,$formName,$f){
+		if( $Token === $this->generateToken( $formName ) ){
+			return true;
+		}else{
 			$f();
 			return false;
-		}else{
-			if( $_POST['CSRFToken'] === $this->generateToken( $formName ) ){
-				return true;
-			}else{
-				$f();
-				return false;
-			}
 		}
 	}
 	/**
@@ -75,12 +77,12 @@ class Controller extends Application {
 		$this->view->set($var,$value);
 	}
 
-	public function addcss($csss){
+	protected function addcss($csss){
 		foreach ($csss as $js) {
 			$this->view->css[]=$css;
 		}
 	}
-	public function addjs($jss){
+	protected function addjs($jss){
 		foreach ($jss as $js) {
 			$this->view->js[]=$js;
 		}

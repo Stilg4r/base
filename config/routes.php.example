@@ -1,0 +1,8 @@
+<?php
+$routes=[
+	'/^GET\/browser\/$/'=>[
+		'controller'=>'Products',
+		'action'=>'index',
+		'vars'=>[]
+	]
+];
