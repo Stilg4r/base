@@ -15,7 +15,8 @@ class Application {
 		$this->remove_magic_quotes();
 		$this->unregister_globals();
 	}
-	function generateToken( $formName ){
+	
+	protected function generateToken( $formName ){
 		if ( !session_id() ) {
 			session_start();
 		}

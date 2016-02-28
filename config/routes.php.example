@@ -1,8 +1,33 @@
 <?php
 $routes=[
-	'/^GET\/browser\/$/'=>[
-		'controller'=>'Products',
+	'/^GET\/$/i'=>[
+		'controller'=>'Users',
 		'action'=>'index',
 		'vars'=>[]
+	],
+	'/^GET\/users$/i'=>[
+		'controller'=>'Users',
+		'action'=>'getList',
+		'vars'=>[]
+	],
+	'/^POST\/users$/i'=>[
+		'controller'=>'Users',
+		'action'=>'create',
+		'vars'=>[]
+	],
+	'/^GET\/users\/[1-9]{1,}$/i'=>[
+		'controller'=>'Users',
+		'action'=>'read',
+		'vars'=>[2]
+	],
+	'/^PUT\/users\/[0-9]{1,}$/i'=>[
+		'controller'=>'Users',
+		'action'=>'update',
+		'vars'=>[2]
+	],
+	'/^DELETE\/users\/[0-9]{1,}$/i'=>[
+		'controller'=>'Users',
+		'action'=>'delete',
+		'vars'=>[2]
 	]
 ];

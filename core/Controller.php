@@ -10,7 +10,7 @@ class Controller extends Application {
 	
     protected $controller;
    	protected $action;
-	protected $models;
+	protected $model;
 	protected $view;
 	/**
 	 * constructor, carga los helper en automatico
@@ -25,14 +25,15 @@ class Controller extends Application {
 		if (file_exists(ROOT.DS.'application'.DS.'controllers'.DS.'helpers'.DS.strtolower(get_class($this)).'.php')){
         	require_once(ROOT.DS.'application'.DS.'controllers'.DS.'helpers'.DS.strtolower(get_class($this)).'.php');
     	}
+
+        if (property_exists($controller, '_model')) {
+			$properties = get_class_vars($controller);
+			$this->model=$properties['model'];
+        }else{
+        	$this->model=$controller.'Model';
+        }
 	}
 
-	protected function jsonResponce($data,$code=200){
-		http_response_code($code);
-		header('Content-Type: application/json');
-		echo json_encode($data);
-		exit();
-	}
 	protected function checkToken($Token,$formName,$f){
 		if( $Token === $this->generateToken( $formName ) ){
 			return true;
