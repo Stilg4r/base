@@ -79,7 +79,7 @@ class Controller extends Application {
 	}
 
 	protected function addcss($csss){
-		foreach ($csss as $js) {
+		foreach ($csss as $css) {
 			$this->view->css[]=$css;
 		}
 	}

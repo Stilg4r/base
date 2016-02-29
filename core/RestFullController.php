@@ -1,5 +1,5 @@
 <?php
-class RestFullControler extends Controller{
+class RestFullController extends Controller{
 	public function __construct($controller,$action) {
 		parent::__construct($controller, $action);
 	}
@@ -24,7 +24,7 @@ class RestFullControler extends Controller{
 		 	http_response_code(209);
 		} 
 	}
-	public function getList(){
+	public function list(){
 		$model=$this->model;
 		$result=$model::findArray();
 		if (empty($result)) {
@@ -56,5 +56,6 @@ class RestFullControler extends Controller{
 		}else{
 			http_response_code(209);
 		}
+		
 	}
 }

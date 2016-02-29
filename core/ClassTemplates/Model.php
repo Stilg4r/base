@@ -1,3 +1,4 @@
 <?php
-class Modelname extends CustomModel{
+class NameModel extends CustomModel{
+	public static $_table = 'dbname';
 }

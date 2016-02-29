@@ -17,12 +17,12 @@ class Router {
 		
 		$url=$_SERVER['REQUEST_METHOD'].'/'.$url;
 
-		foreach ($routes as $regex => $todo) {
-			if (preg_match($regex, $url)) {
-				$controller=$todo['controller'];
-				$action=$todo['action'];
+		foreach ($routes as $route => $destination) {
+			if (preg_match($route, $url)) {
+				$controller=$destination['controller'];
+				$action=$destination['action'];
 				$query_string=[];
-				foreach ($todo['vars'] as $varpos) {
+				foreach ($destination['vars'] as $varpos) {
 					$vars=explode("/", $url);
 					$query_string[]=$vars[$varpos];
 				}
@@ -31,7 +31,7 @@ class Router {
 		}
 
 		if (!isset($controller)) {
-			$controller='404';
+			$controller='notcontroler';
 		}
 		
 		$controller_name = $controller;
