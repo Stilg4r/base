@@ -31,7 +31,7 @@ class Router {
 		}
 
 		if (!isset($controller)) {
-			$controller='notcontroler';
+			$controller='404';
 		}
 		
 		$controller_name = $controller;
@@ -43,7 +43,7 @@ class Router {
 		}elseif(file_exists(ROOT . DS .'static' . DS . $controller . '.php')) {
 		  	include (ROOT . DS .'static' . DS . $controller . '.php');
 		}else{
-		   	header('Location: '.PATH.'/404');	
+		   	header('Location: /404');	
 		}	    
 	}
 }

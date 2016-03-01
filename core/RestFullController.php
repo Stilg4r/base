@@ -24,7 +24,7 @@ class RestFullController extends Controller{
 		 	http_response_code(209);
 		} 
 	}
-	public function list(){
+	public function all(){
 		$model=$this->model;
 		$result=$model::findArray();
 		if (empty($result)) {
