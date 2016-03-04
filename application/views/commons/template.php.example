@@ -25,6 +25,9 @@
   <body>
     <?php $this->render_partial($view_name); ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+		var PATH ='<?php echo PATH; ?>';
+	</script>
     <script src="/js/application.js"></script>
     <?php $this->js(); ?>	
   </body>

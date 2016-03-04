@@ -1,5 +1,4 @@
 // js de la aplicacion
-
 $.fn.formToJSON = function() {
 	var jsonData = {};
 	var formData = $(this).serializeArray();
