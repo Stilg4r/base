@@ -16,4 +16,19 @@ $.fn.formToJSON = function() {
 
 	return JSON.stringify(jsonData);
 };
-
+function notify(type,message) {	
+	setTimeout(function() {
+		$.bootstrapPurr(message, {
+			element: 'body',
+			type: type,
+			offset: {
+				amount: 0,
+				from: 'top'
+			},
+			align: 'center',
+			width: 'auto',
+			allow_dismiss: true, 
+			allow_dismiss_type: 'hover',
+			});
+	}, 100);
+};

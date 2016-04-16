@@ -9,8 +9,8 @@
 class View extends Application{
 	
 	protected $variables = array();
-	public $css=[];
-	public $js=[];
+	protected $css=[];
+	protected $js=[];
 
 	function __construct(){}
 
@@ -61,7 +61,20 @@ class View extends Application{
 	}
 	public function js(){
 		foreach ($this->js as $js) {
-			echo '<script src="/js/'.$js.'.js"></script>';
+			echo '<script type="text/javascript" src="/js/'.$js.'.js"></script>';
 		}
 	}
+
+	protected function addCss($csss){
+		foreach ($csss as $css) {
+			$this->css=$this->css+$css;
+		}
+	}
+	
+	protected function addJs($jss){
+		foreach ($jss as $js) {
+			$this->js=$this->js+$js;
+		}
+	}
+
 }
