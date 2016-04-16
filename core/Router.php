@@ -36,6 +36,10 @@ class Router {
 		
 		$controller_name = $controller;
 		$controller = ucwords($controller);
+
+		if (DEBUG) {
+			error_log($controller_name.'/'.$controller); 
+		}
 				
 		if (class_exists($controller) and method_exists($controller, $action)) {
 			$dispatch = new $controller($controller_name,$action);
