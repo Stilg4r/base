@@ -23,7 +23,7 @@ class Controller extends Application {
 		$this->controller = $controller;
 		$this->action = $action;
 		$this->view = new View();
-		$this->$template = DEFAULT_TEMPLATE;
+		$this->template = DEFAULT_TEMPLATE;
 
         if (property_exists($controller, '_model')) {
 			$properties = get_class_vars($controller);
@@ -47,7 +47,7 @@ class Controller extends Application {
 	}
 
 	protected function setTemplate($template) {
-		$this->$template=$template;
+		$this->template=$template;
 	}
 
 	protected function addHelper($helper) {
@@ -65,7 +65,7 @@ class Controller extends Application {
 	 * @param  string $template  Template 
 	 */
 	protected function renderView($view_name){
-		$this->view->render($view_name,$this->$template);
+		$this->view->render($view_name,$this->template);
 	}
 
 	protected function setVars($var,$value){
@@ -87,7 +87,7 @@ class Controller extends Application {
 		$this->view->addCss($csss);
 	}
 	protected function addJs($jss){
-		$this->view->addJs($jss)
+		$this->view->addJs($jss);
 	}
 
 }

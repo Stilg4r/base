@@ -54,27 +54,25 @@ class View extends Application{
 			echo "No existe la vista parcial ".$render_partial."\n" ;
 		}	
 	}
-	public function css(){
+	protected function css(){
 	 	foreach ($this->css as $css) {
-	 		echo '<link rel="stylesheet" href="/css/'.$css.'.css">';
+	 		echo '<link rel="stylesheet" href="'.PATH.'/css/'.$css.'.css">';
+	 		echo "\r\n";
 	 	}
 	}
-	public function js(){
+	protected function js(){
 		foreach ($this->js as $js) {
-			echo '<script type="text/javascript" src="/js/'.$js.'.js"></script>';
+			echo '<script type="text/javascript" src="'.PATH.'/js/'.$js.'.js"></script>';
+			echo "\r\n";
 		}
 	}
 
-	protected function addCss($csss){
-		foreach ($csss as $css) {
-			$this->css=$this->css+$css;
-		}
+	public function addCss($csss){
+		$this->css=$this->css+$csss;
 	}
 	
-	protected function addJs($jss){
-		foreach ($jss as $js) {
-			$this->js=$this->js+$js;
-		}
+	public function addJs($jss){
+		$this->js=$this->js+$jss;
 	}
 
 }

@@ -13,6 +13,15 @@ class Router {
 	 */
 	public function route($url) {
 
+	
+	    $url_array = array();
+    	$url_array = explode("/",$url);
+
+		if(file_exists(ROOT . DS .'static' . DS . $url_array[0] . '.php') and sizeof($url_array)==1 )  {
+		   	include (ROOT . DS .'static' . DS . $url_array[0] . '.php');
+		   	exit();
+		}
+
 		require_once(ROOT.DS.'config'.DS.'routes.php');
 		
 		$url=$_SERVER['REQUEST_METHOD'].'/'.$url;
@@ -37,15 +46,15 @@ class Router {
 		$controller_name = $controller;
 		$controller = ucwords($controller);
 
+
 		if (DEBUG) {
-			error_log($controller_name.'/'.$controller); 
+			$action=(isset($action))?$action:'';
+			error_log($url.'=>'.$controller_name.'/'.$action); 
 		}
 				
 		if (class_exists($controller) and method_exists($controller, $action)) {
 			$dispatch = new $controller($controller_name,$action);
 		 	call_user_func_array([$dispatch,$action],$query_string);
-		}elseif(file_exists(ROOT . DS .'static' . DS . $controller . '.php')) {
-		  	include (ROOT . DS .'static' . DS . $controller . '.php');
 		}else{
 		   	header('Location: /404');	
 		}	    
