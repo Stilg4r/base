@@ -10,7 +10,6 @@ class Controller extends Application {
 	
     protected $controller;
    	protected $action;
-	protected $model;
 	protected $view;
 	protected $template;
 	/**
@@ -24,12 +23,14 @@ class Controller extends Application {
 		$this->action = $action;
 		$this->view = new View();
 		$this->template = DEFAULT_TEMPLATE;
+	}
 
-        if (property_exists($controller, '_model')) {
-			$properties = get_class_vars($controller);
-			$this->model=$properties['model'];
+	public function getModel(){
+        if (property_exists($this->controller, '_model')) {
+			$properties = get_class_vars($this->controller);
+			return $properties['model'];
         }else{
-        	$this->model=$controller.'Model';
+        		return $this->controller.'Model';
         }
 	}
 
@@ -64,11 +65,14 @@ class Controller extends Application {
 	 * @param  array  $vars      Array que contenga las variables de la vita 
 	 * @param  string $template  Template 
 	 */
-	protected function renderView($view_name){
+	protected function renderView($view_name=null){
+		if (!isset($view_name)) {
+			$view_name = strtolower($this->controller).'/'.$this->action;
+		}
 		$this->view->render($view_name,$this->template);
 	}
 
-	protected function setVars($var,$value){
+	protected function setVars($vars){
 		foreach($vars as $var => $value) {
 			$this->view->set($var,$value);
 		}

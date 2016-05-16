@@ -15,7 +15,7 @@ class Router {
 
 	
 	    $url_array = array();
-    	$url_array = explode("/",$url);
+    		$url_array = explode("/",$url);
 
 		if(file_exists(ROOT . DS .'static' . DS . $url_array[0] . '.php') and sizeof($url_array)==1 )  {
 		   	include (ROOT . DS .'static' . DS . $url_array[0] . '.php');

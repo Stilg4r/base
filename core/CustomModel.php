@@ -9,6 +9,10 @@ load_conf('db');
  * Clase personalizada para el modelo, se agregan validadores 
  */
 class CustomModel extends Model{
+	protected function null($var) {
+		return ($var=="")?null:$var;
+	}
+
 	/**
 	 * Valida que el array no contenga valores vacios
 	 * @param  array $arr arreglo de valores
@@ -28,7 +32,7 @@ class CustomModel extends Model{
 	 * @return boolean      false si lo enconto
 	 */
 	protected function unique($attr,$val){
-		if ( self::where($attr, $val )->find_one() ) {
+		if ( ORM::for_table($this->_get_table_name(get_class($this)))->where($attr,$val)->find_many() ) {
 			return false;
 		}else{
 			return true;
@@ -47,4 +51,25 @@ class CustomModel extends Model{
 		}
 		
 	}
+	public function columns() {
+		return ORM::for_table('')->rawQuery('SHOW COLUMNS FROM '.$this->_get_table_name(get_class($this)));
+	}
+
+	public function __set($property, $value) {
+		load_lib('HTMLPurifier/HTMLPurifier.auto');
+		$config = HTMLPurifier_Config::createDefault();
+		$config->set('Core.Encoding', 'UTF-8');
+		$config->set('HTML.Doctype', 'HTML 4.01 Transitional'); 
+		$config->set('HTML.AllowedElements', '');  
+		$config->set('Attr.AllowedClasses', '');  
+		$config->set('HTML.AllowedAttributes', '');  
+		$config->set('AutoFormat.RemoveEmpty', true);  
+		$purifier = new HTMLPurifier($config);
+
+		$value=$purifier->purify($value);
+		$value=$this->null($value);
+
+		parent::__set($property,$value);
+	}
+
 }

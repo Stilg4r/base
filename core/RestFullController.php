@@ -25,7 +25,7 @@ class RestFullController extends Controller{
 		} 
 	}
 	public function all(){
-		$model=$this->model;
+		$model=$this->getModel();
 		$result=$model::findArray();
 		if (empty($result)) {
 			http_response_code(204);
@@ -34,28 +34,27 @@ class RestFullController extends Controller{
 		$this->jsonResponce($result);
 	}
 	public function create(){
-		$model=$this->model;
+		$model=$this->getModel();
 		$result=$model::create();
 		$this->setter($result,201);
 	}
 	public function read($id){
-		$model=$this->model;
+		$model=$this->getModel();
 		$result=$model::ifExist($id,function(){http_response_code(404) ;exit();});
 		$this->jsonResponce($result->asArray());
 	}
 	public function update($id){
-		$model=$this->model;
+		$model=$this->getModel();
 		$result=$model::ifExist($id,function(){http_response_code(404) ;exit();});
 		$this->setter($result);
 	}
 	public function delete($id){
-		$model=$this->model;
+		$model=$this->getModel();
 		$result=$model::ifExist($id,function(){http_response_code(404) ;exit();});
 		if ($result->delete()) {
 			http_response_code(200);
 		}else{
 			http_response_code(409);
 		}
-		
 	}
 }

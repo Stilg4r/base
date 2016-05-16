@@ -129,7 +129,7 @@
         protected $_raw_query = '';
 
         // The raw query parameters
-        protected $_raw_parameters = array();
+        public $_raw_parameters = array();
 
         // Array of WHERE clauses
         protected $_where_conditions = array();
