@@ -87,10 +87,16 @@ class Controller extends Application {
 		$this->view->set($var,$value);
 	}
 
-	protected function addCss($csss){
+	protected function addCss($csss=null){
+		if (!isset($csss)) {
+			$csss=[strtolower($this->controller).'/'.$this->action];
+		}
 		$this->view->addCss($csss);
 	}
-	protected function addJs($jss){
+	protected function addJs($jss=null){
+		if (!isset($jss)) {
+			$jss=[strtolower($this->controller).'/'.$this->action];
+		}		
 		$this->view->addJs($jss);
 	}
 

@@ -9,21 +9,15 @@ load_conf('db');
  * Clase personalizada para el modelo, se agregan validadores 
  */
 class CustomModel extends Model{
-	protected function null($var) {
-		return ($var=="")?null:$var;
-	}
+
 
 	/**
 	 * Valida que el array no contenga valores vacios
 	 * @param  array $arr arreglo de valores
 	 * @return boolean false si no encuentra valores vacios
 	 */
-	protected function noempty($arr){
-		if (in_array("", $arr )){
-			return false;
-		}else{
-			return true;
-		}
+	protected function noEmpty($arr){
+		return !(in_array("", $arr));
 	}
 	/**
 	 * valida que sea unico 
@@ -31,7 +25,8 @@ class CustomModel extends Model{
 	 * @param  string $val  valor
 	 * @return boolean      false si lo enconto
 	 */
-	protected function unique($attr,$val){
+	protected function unique($attr){
+		$val=$this->get($attr);
 		if ( ORM::for_table($this->_get_table_name(get_class($this)))->where($attr,$val)->find_many() ) {
 			return false;
 		}else{
@@ -55,7 +50,7 @@ class CustomModel extends Model{
 		return ORM::for_table('')->rawQuery('SHOW COLUMNS FROM '.$this->_get_table_name(get_class($this)));
 	}
 
-	public function __set($property, $value) {
+	public static function purify($value) {
 		load_lib('HTMLPurifier/HTMLPurifier.auto');
 		$config = HTMLPurifier_Config::createDefault();
 		$config->set('Core.Encoding', 'UTF-8');
@@ -65,11 +60,24 @@ class CustomModel extends Model{
 		$config->set('HTML.AllowedAttributes', '');  
 		$config->set('AutoFormat.RemoveEmpty', true);  
 		$purifier = new HTMLPurifier($config);
+		
+		return $purifier->purify($value);
 
-		$value=$purifier->purify($value);
-		$value=$this->null($value);
-
-		parent::__set($property,$value);
+	}
+	public function __set($property, $value) {
+		parent::__set($property,$this->purify($value));
 	}
 
+	public function set($key, $value = null) {
+		parent::set($key,$this->purify($value));
+	}
+
+	public function validateEmail($value){
+		$dns=explode("@",$value);
+		if (filter_var($value, FILTER_VALIDATE_EMAIL) and checkdnsrr(array_pop($dns),"MX") ) {
+			return TRUE;
+		}else{
+			return FASE;
+		}
+	}
 }
