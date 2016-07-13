@@ -13,11 +13,11 @@ if (isset($_REQUEST['url'])) {
 	$url="";
 }
 
-if (!isset($_SESSION['user'])) {
-	$url = 'login';
+if (preg_match("/^administration.*/",$url ) and !isset($_SESSION['login'])) {
+	$url = 'administration/login';
 }
 
-if (isset($_SESSION['keep']) and $_SESSION['keep'] ) {
+if (isset($_SESSION['keep_open']) and $_SESSION['keep_open'] ) {
 	#nada
 }else{
 	// Make sure we have a canary set

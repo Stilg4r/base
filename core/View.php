@@ -33,26 +33,23 @@ class View extends Application{
 	 */
 	function render($view_name,$snippet = DEFAULT_TEMPLATE) {
 		extract($this->variables);
-		
 		if( file_exists(ROOT . DS .'application' . DS . 'views' . DS . $snippet . '.php') ) {
 			include (ROOT . DS .'application' . DS . 'views' . DS . $snippet . '.php');
 		} else {
 			echo "No existe la plantilla ".$snippet."\n" ;
-		}		
+		}
 	}
 	/**
 	 * Renderiza un contenido parcial
 	 * @param  strig $render_partial nombre de la vista parcial
 	 */
 	function render_partial($render_partial){
-		
 		extract($this->variables);
-
 		if( file_exists(ROOT . DS .'application' . DS . 'views' . DS . $render_partial . '.php') ) {
 			include (ROOT . DS .'application' . DS . 'views' . DS . $render_partial . '.php');
 		} else {			
 			echo "No existe la vista parcial ".$render_partial."\n" ;
-		}	
+		}
 	}
 	protected function css(){
 	 	foreach ($this->css as $css) {

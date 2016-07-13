@@ -16,12 +16,11 @@ class RestFullController extends Controller{
 				$result->set($key,$value);
 			}
 			if ($result->save()) {
-				$this->jsonResponce($result->asArray(),$code);
+				$this->jsonResponce($result->asArray(),$code);	
 			}else {
 				http_response_code(400);
 			}
 		}catch (Exception $e) {
-			error_log($e);
 		 	http_response_code(409);
 		} 
 	}
@@ -52,14 +51,9 @@ class RestFullController extends Controller{
 	public function delete($id){
 		$model=$this->getModel();
 		$result=$model::ifExist($id,function(){http_response_code(404) ;exit();});
-		try {
-			if ($result->delete()) {
-				http_response_code(200);
-			}else{
-				http_response_code(409);
-			}
-		} catch (Exception $e) {
-			error_log($e);
+		if ($result->delete()) {
+			http_response_code(200);
+		}else{
 			http_response_code(409);
 		}
 	}

@@ -14,7 +14,7 @@ class Router {
 	public function route($url) {
 
 	
-	    $url_array = array();
+		$url_array = array();
     		$url_array = explode("/",$url);
 
 		if(file_exists(ROOT . DS .'static' . DS . $url_array[0] . '.php') and sizeof($url_array)==1 )  {

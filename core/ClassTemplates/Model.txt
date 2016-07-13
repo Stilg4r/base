@@ -1,6 +1,4 @@
 <?php
-//load_lib('Respect/autoload');
-//use Respect\Validation\Validator as v;
 class #ClassName# extends CustomModel{
 	public static $_table = '#ModelName#';
 }
