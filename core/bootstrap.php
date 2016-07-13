@@ -12,7 +12,7 @@ require_once('core' . DS . 'functions.php');
  * Carga automatica de clases 
  * @param  string $className nombre de la clase
  */
-function __autoload($className) {
+function autoload($className) {
 	if (file_exists(ROOT . DS .'core' . DS . ($className) . '.php')) {
         require_once(ROOT . DS .'core' . DS . ($className) . '.php');
     } 
@@ -23,6 +23,8 @@ function __autoload($className) {
         require_once(ROOT . DS . 'application' . DS . 'models' . DS . $className . '.php');
 	}
 }
+spl_autoload_register('autoload');
+
 /**
  * Enruta la peticion al contrador adecuado
  */
