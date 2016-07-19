@@ -38,25 +38,20 @@ class Router {
 				break;
 			}
 		}
-
 		if (!isset($controller)) {
 			$controller='404';
 		}
-		
 		$controller_name = $controller;
 		$controller = ucwords($controller);
-
-
 		if (DEBUG) {
 			$action=(isset($action))?$action:'';
 			error_log($url.'=>'.$controller_name.'/'.$action); 
-		}
-				
+		}	
 		if (class_exists($controller) and method_exists($controller, $action)) {
 			$dispatch = new $controller($controller_name,$action);
 		 	call_user_func_array([$dispatch,$action],$query_string);
 		}else{
-		   	header('Location: /404');	
+		   	header('Location: '.PATH.'/404');	
 		}	    
 	}
 }
