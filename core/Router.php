@@ -11,21 +11,15 @@ class Router {
 	 * Redirige al controlador y metodo
 	 * @param  string $url url de solicitud
 	 */
-	public function route($url) {
-
-	
+	public static function route($url) {
 		$url_array = array();
-    		$url_array = explode("/",$url);
-
+   		$url_array = explode("/",$url);
 		if(file_exists(ROOT . DS .'static' . DS . $url_array[0] . '.php') and sizeof($url_array)==1 )  {
 		   	include (ROOT . DS .'static' . DS . $url_array[0] . '.php');
 		   	exit();
 		}
-
 		require_once(ROOT.DS.'config'.DS.'routes.php');
-		
 		$url=$_SERVER['REQUEST_METHOD'].'/'.$url;
-
 		foreach ($routes as $route => $destination) {
 			if (preg_match($route, $url)) {
 				$controller=$destination['controller'];
