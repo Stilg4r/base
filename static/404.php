@@ -1,6 +1,5 @@
 <?php header("HTTP/1.0 404 Not Found"); ?>
 <!DOCTYPE html>
-<html lang="en-gb">
 <head>
 <meta charset="utf-8" />
 <title>404 - Sorry page can not be found</title>
@@ -8,18 +7,14 @@
 <meta name="robots" content="noindex, nofollow">
 <style type="text/css">@-ms-viewport,@viewport{width:device-width}body{margin:0;padding:0;font:normal 100%/1.5 Geneva,Tahoma,freesans,sans-serif;text-align:center;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;color:#fff;background-color:#34343E;-ms-overflow-style:-ms-autohiding-scrollbar}svg:not(:root){overflow:hidden}svg,#drop{display:block}#drop{position:relative;max-width:1280px;margin:0 auto; padding:1.5em .75em}h1{font-family:Tahoma,sans-serif;font-size:2.5em;line-height:1.2}a:link,a:visited{text-decoration:none;border-bottom:1px dotted currentColor;color:inherit;transition:color .1s ease}a:hover,active,a:focus{color:#6ECCC8}.darker{color:#737277}.svg-scalefix-container{position:relative;height:0;width:100%;padding:0;padding-bottom:35%}.svg-scalefix{position:absolute;height:100%;width:100%;left:0;top:0}
 </style>
-<meta name="author" content="Paul Foster">
+
 <meta name="copyright" content="Paul Foster 2014">
-<meta property="og:title" content="404 not found | paulfosterdesign.co.uk">
+<meta property="og:title" content="404 not found">
 <meta property="og:type" content="website">
-<meta property="og:url" content="www.paulfosterdesign.co.uk/404notfound/">
-<meta property="og:description" content="Paul Foster Page Not Found">
-<meta property="og:site-name" content="www.paulfosterdesign.co.uk">
-<meta property="og:locale" content="en_GB">
+<meta property="og:description" content="Page Not Found">
 <meta property="og:image" content="http://www.paulfosterdesign.co.uk/assets/images/pfd-webclip-196x196.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@plfstr">
-<meta name="twitter:domain" content="www.paulfosterdesign.co.uk">
 <meta property="article:tag" content="404, url, server, browser">
 </head>
 <body>
