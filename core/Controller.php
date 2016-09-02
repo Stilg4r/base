@@ -51,9 +51,16 @@ class Controller extends Application {
 		$this->template=$template;
 	}
 
-	protected function addHelper($helper) {
-		if (file_exists(ROOT.DS.'application'.DS.'controllers'.DS.'helpers'.DS.strtolower($helper).'.php')){
-        	require_once(ROOT.DS.'application'.DS.'controllers'.DS.'helpers'.DS.strtolower($helper).'.php');
+	protected function addHelper($helper=null) {
+		if (!isset($helper)) {
+			$helper = $this->controller;
+		}
+		$path=ROOT.DS.'application'.DS.'controllers'.DS.'helpers'.DS.strtolower($helper).'.php';
+		if (file_exists($path)){
+        	require_once($path);
+    	}else{
+    		$trace = debug_backtrace();
+			trigger_error('no existe helper ' . $path  .' '. $trace[0]['file'] .' en la línea ' . $trace[0]['line'],E_USER_ERROR);
     	}
 	}
 
