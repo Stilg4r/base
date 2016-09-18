@@ -8,6 +8,7 @@ Pequeño framework MVC
 * Envio de correos via https://github.com/PHPMailer/PHPMailer
 * Sanitizacion de inputs via https://github.com/PHPMailer/PHPMailer
 * validadores via https://github.com/Respect/Validation
+
 # TODO 
 * Documentacion 
 * Integrar composer 
