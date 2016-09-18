@@ -9,6 +9,7 @@ load_conf('db');
  * Clase personalizada para el modelo, se agregan validadores 
  */
 class CustomModel extends Model{
+	private $errors =[];
 
 
 	/**
@@ -79,5 +80,11 @@ class CustomModel extends Model{
 		}else{
 			return FASE;
 		}
+	}
+	public function setError($error) {
+		$this->errors[]=$error;
+	}
+	public function getErrors(){
+		return $this->errors;
 	}
 }

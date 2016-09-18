@@ -18,10 +18,10 @@ class RestFullController extends Controller{
 			if ($result->save()) {
 				$this->jsonResponce($result->asArray(),$code);	
 			}else {
-				http_response_code(400);
+				$this->jsonResponce($result->getErrors(),409);
 			}
 		}catch (Exception $e) {
-		 	http_response_code(409);
+		 	http_response_code(400);
 		} 
 	}
 	public function all(){
@@ -54,7 +54,7 @@ class RestFullController extends Controller{
 		if ($result->delete()) {
 			http_response_code(200);
 		}else{
-			http_response_code(409);
+			$this->jsonResponce($result->getErrors(),409);
 		}
 	}
 }

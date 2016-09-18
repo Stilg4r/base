@@ -33,10 +33,12 @@ class View extends Application{
 	 */
 	function render($view_name,$snippet = DEFAULT_TEMPLATE) {
 		extract($this->variables);
-		if( file_exists(ROOT . DS .'application' . DS . 'views' . DS . $snippet . '.php') ) {
-			include (ROOT . DS .'application' . DS . 'views' . DS . $snippet . '.php');
+		$path=ROOT . DS .'application' . DS . 'views' . DS . $snippet . '.php';
+		if( file_exists($path) ) {
+			include ($path);
 		} else {
-			echo "No existe la plantilla ".$snippet."\n" ;
+    		$trace = debug_backtrace();
+			trigger_error('no existe plantilla '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
 		}
 	}
 	/**
@@ -45,10 +47,12 @@ class View extends Application{
 	 */
 	function render_partial($render_partial){
 		extract($this->variables);
-		if( file_exists(ROOT . DS .'application' . DS . 'views' . DS . $render_partial . '.php') ) {
-			include (ROOT . DS .'application' . DS . 'views' . DS . $render_partial . '.php');
+		$path=ROOT . DS .'application' . DS . 'views' . DS . $render_partial . '.php';
+		if( file_exists($path) ) {
+			include ($path);
 		} else {			
-			echo "No existe la vista parcial ".$render_partial."\n" ;
+    		$trace = debug_backtrace();
+			trigger_error('no existe contenido parcial '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
 		}
 	}
 	protected function css(){
