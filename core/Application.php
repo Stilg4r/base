@@ -1,21 +1,10 @@
 <?php
-/**
- * Clase base para la applicacion
- */
-
-/**
- * Clase base para la applicacion
- */
 class Application {
-	/**
-	 * Inicia las metodos 
-	 */
 	function __construct() {
 		$this->set_reporting();
 		$this->remove_magic_quotes();
 		$this->unregister_globals();
 	}
-	
 	protected function generateToken( $formName ){
 		if ( !session_id() ) {
 			session_start();
@@ -23,9 +12,6 @@ class Application {
 		$sessionId = session_id();
 		return sha1( SECRETKEY.$formName.$sessionId);
 	}	
-	/**
-	 * Muestra errores depndiendo del entorno
-	 */
 	private function set_reporting(){
 		if (DEBUG) {
 			error_reporting(E_ALL);

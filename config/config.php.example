@@ -1,46 +1,8 @@
 <?php
-/**
- * Variables glovalse y entorno
- */
-
-/**
- * Define el ambiente
- */
-
-//ini_set('date.timezone', 'America/New_York');
-#manejo de sesiones
-ini_set('session.save_handler','files');
-ini_set('session.save_path','/tmp/');
-ini_set('session.use_cookies',1);
-#cuando este funcionando el ssl
-//ini_set('session.cookie_secure',1);
-ini_set('session.use_only_cookies',1);
-#cuando tengamos un domino  
-//ini_set('session.cookie_domain','.outdoorsphoto.mx');
-ini_set('session.cookie_httponly',1);
-ini_set('session.cookie_lifetime',0);
-ini_set('session.entropy_length',32);
-ini_set('session.entropy_file','/dev/urandom');
-ini_set('session.hash_function','sha256');
-ini_set('session.hash_bits_per_character',5);
-
-
-#fileupload 
-ini_set('max_file_uploads',500);
-ini_set('upload_max_filesize','1024M');
-ini_set('post_max_size',' 1024M');
-
-
-//tiempo de execution
-//ini_set('max_execution_time','259200');
-//ini_set('max_input_time','259200');
-
-
-
 
 define ('DEBUG', true);
 define ('DOMAIN', '');
-define ('PATH', 'http://'.DOMAIN);
+define ('PATH', '');
 
 define('SECRETKEY','');## Synchronizer Token Patternx
 
@@ -50,26 +12,10 @@ define ('DBNAME','');
 define ('USER', '');
 define ('PASS', '');		
 
-
-/**
- * Define el contrador por defecto
- */
 define('DEFAULT_CONTROLLER', '404');
 
-/**
- * Define la la accion por defecto
- */
 define('DEFAULT_ACTION', 'index');
 
-/**
- * Define la plantilla por defecto
- */
 define('DEFAULT_TEMPLATE', 'commons/template'); 
-/**
- * Define la ruta donde se guardaran los errores cuande este en produccion
- */
 
 define('ERROR_PAHT', ROOT.DS.'tmp'.DS.'error.log');
-
-define ('ADMIN', 123);
-define ('ADMINPASS', 123);

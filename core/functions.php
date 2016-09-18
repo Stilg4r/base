@@ -1,27 +1,19 @@
 <?php
-/**
- * Funciones glovales
- */
-
-/**
- * Funcion de carga de biblotecas
- */
 function load_lib($lib){
-	if (file_exists(ROOT.DS.'core'.DS.'libs'.DS.$lib.'.php')){
-        require_once(ROOT.DS.'core'.DS.'libs'.DS.$lib.'.php');
+	$path=ROOT.DS.'core'.DS.'libs'.DS.$lib.'.php';
+	if (file_exists($path)){
+        require_once($path);
     }else{
-    	echo "No existe la biblotecas";
-    	exit();
+   		$trace = debug_backtrace();
+		trigger_error('fallo al cargar la bibiloteca '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
     }
 }
-/**
- * Funcion de carda de configaciones
- */
 function load_conf($conf){
-	if (file_exists(ROOT.DS.'config'.DS.$conf.'.php')){
-        require_once(ROOT.DS.'config'.DS.$conf.'.php');
+	$path=ROOT.DS.'config'.DS.$conf.'.php';
+	if (file_exists($path)){
+        require_once($path);
     }else{
-    	echo "No existe el archivo de configuracion";
-    	exit();
+   		$trace = debug_backtrace();
+		trigger_error('fallo al cargar la configuracion '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
     }
 }

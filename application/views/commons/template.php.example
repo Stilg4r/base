@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="/css/application.css">
+	<link rel="stylesheet" href="<?php echo PATH; ?>/css/application.css">
 
   	<?php $this->css(); ?>
 
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://raw.githubusercontent.com/softwarespot/jquery-bootstrap-purr/master/jquery-bootstrap-purr.js"></script>
     <script type="text/javascript"> var PATH ='<?php echo PATH; ?>'; </script>
-    <script type="text/javascript" src="/js/application.js"></script>
+    <script type="text/javascript" src="<?php echo PATH; ?>/js/application.js"></script>
     <?php $this->js(); ?>	
   </body>
 </html>

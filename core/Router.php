@@ -1,16 +1,5 @@
 <?php
-/**
- * Clase router
- */
-
-/**
- * Clase que enruta las peticiones
- */
 class Router {
-	/**
-	 * Redirige al controlador y metodo
-	 * @param  string $url url de solicitud
-	 */
 	public static function route($url) {
 		$url_array = array();
    		$url_array = explode("/",$url);

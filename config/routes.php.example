@@ -15,7 +15,7 @@ $routes=[
 		'action'=>'create',
 		'vars'=>[]
 	],
-	'/^GET\/users\/[1-9]{1,}$/i'=>[
+	'/^GET\/users\/[0-9]{1,}$/i'=>[
 		'controller'=>'Users',
 		'action'=>'read',
 		'vars'=>[2]
