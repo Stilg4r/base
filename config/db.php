@@ -1,9 +1,4 @@
 <?php
-/**
- * Configacion de la base de datos
- */
-load_lib('idiorm');
-load_lib('paris');
 ORM::configure(ADAPTER.':host='.HOST.';dbname='.DBNAME);
 ORM::configure('username', USER);
 ORM::configure('password', PASS);

@@ -12,5 +12,6 @@ function autoload($className) {
         require_once(ROOT . DS . 'application' . DS . 'models' . DS . $className . '.php');
 	}
 }
+require ROOT . '/vendor/autoload.php';
 spl_autoload_register('autoload');
 Router::route($url);

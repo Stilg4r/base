@@ -1,6 +1,4 @@
 <?php
-load_lib('idiorm');
-load_lib('paris');
 load_conf('db');
 class CustomModel extends Model{
 	private $errors =[];
@@ -27,7 +25,6 @@ class CustomModel extends Model{
 		return ORM::for_table('')->rawQuery('SHOW COLUMNS FROM '.$this->_get_table_name(get_class($this)));
 	}
 	public static function purify($value) {
-		load_lib('HTMLPurifier/HTMLPurifier.auto');
 		$config = HTMLPurifier_Config::createDefault();
 		$config->set('Core.Encoding', 'UTF-8');
 		$config->set('HTML.Doctype', 'HTML 4.01 Transitional'); 
