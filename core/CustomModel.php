@@ -1,7 +1,7 @@
 <?php
 load_conf('db');
 class CustomModel extends Model{
-	private $errors =[];
+	private $errors;
 	protected function noEmpty($arr){
 		return !(in_array("", $arr));
 	}
@@ -33,9 +33,7 @@ class CustomModel extends Model{
 		$config->set('HTML.AllowedAttributes', '');  
 		$config->set('AutoFormat.RemoveEmpty', true);  
 		$purifier = new HTMLPurifier($config);
-		
 		return $purifier->purify($value);
-
 	}
 	public function __set($property, $value) {
 		parent::__set($property,$this->purify($value));
@@ -52,7 +50,7 @@ class CustomModel extends Model{
 		}
 	}
 	public function setError($error) {
-		$this->errors[]=$error;
+		$this->errors=$error;
 	}
 	public function getErrors(){
 		return $this->errors;
