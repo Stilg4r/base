@@ -11,6 +11,8 @@ Pequeño framework MVC
 #Dependencias 
 * Active Record via https://j4mie.github.io/idiormandparis/
 * Sanitizacion de inputs via https://github.com/ezyang/htmlpurifier
+
+#Dependencias alternativas
 * bootstrap https://github.com/twbs/bootstrap
 * jquery https://github.com/jquery/jquery
 * bootstrap-purr https://github.com/softwarespot/jquery-bootstrap-purr
