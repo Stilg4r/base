@@ -31,23 +31,37 @@ class View extends Application{
 		}
 	}
 	protected function css(){
+		require_once(ROOT.DS.'config'.DS.'css_alias.php');
 	 	foreach ($this->css as $css) {
-	 		if (preg_match('/^htt(ps|p):\/\/.*\.css$/', $css)) {
+	 		if (file_exists(ROOT.'/css/'.$css.'.css')) {
+	 			echo '<link rel="stylesheet" href="'.PATH.'/css/'.$css.'.css">';
+	 		}elseif (file_exists(ROOT.'/bower_components/'.$css.'.css')) {
+	 			echo '<link rel="stylesheet" href="'.PATH.'/bower_components/'.$css.'.css">';
+	 		}elseif (isset($alias[$css]) and file_exists(ROOT.$alias[$css])) {
+	 			echo '<link rel="stylesheet" href="'.PATH.$alias[$css].'">';
+	 		}elseif (preg_match('/^htt(ps|p):\/\/.*\.css$/', $css)) {
 	 			echo '<link rel="stylesheet" href="'.$css.'">';
 	 		}else{
-	 			echo '<link rel="stylesheet" href="'.PATH.'/css/'.$css.'.css">';	 			
+	 			echo "<!-- No existe el archivo css -->";
 	 		}
 	 		echo "\r\n";
 	 	}
 	}
 	protected function js(){
+		require_once(ROOT.DS.'config'.DS.'js_alias.php');
 		foreach ($this->js as $js) {
-			if (preg_match('/^htt(ps|p):\/\/.*\.js$/', $js)) {
-				echo '<script type="text/javascript" src="'.$js.'"></script>';
-			}else{
-				echo '<script type="text/javascript" src="'.PATH.'/js/'.$js.'.js"></script>';
-			}
-			echo "\r\n";
+	 		if (file_exists(ROOT.'/js/'.$js.'.js')) {
+	 			echo '<script type="text/javascript" src="'.PATH.'/js/'.$js.'.js"></script>';
+	 		}elseif (file_exists(ROOT.'/bower_components/'.$js.'.js')) {
+	 			echo '<script type="text/javascript" src="'.PATH.'/bower_components/'.$js.'.js"></script>';
+	 		}elseif (isset($alias[$js]) and file_exists(ROOT.$alias[$js])) {
+	 			echo '<script type="text/javascript" src="'.PATH.$alias[$js].'"></script>';
+	 		}elseif (preg_match('/^htt(ps|p):\/\/.*\.js$/', $js)) {
+	 			echo '<script type="text/javascript" src="'.$js.'"></script>';
+	 		}else{
+	 			echo "<!-- No existe el archivo js -->";
+	 		}
+	 		echo "\r\n";
 		}
 	}
 	private function add2array(&$array,$item) {

@@ -61,13 +61,13 @@ class Controller extends Application {
 	}
 	protected function addCss($csss=null){
 		if (!isset($csss)) {
-			$csss=[strtolower($this->controller).'/'.$this->action];
+			$csss=strtolower($this->controller).'/'.$this->action;
 		}
 		$this->view->addCss($csss);
 	}
 	protected function addJs($jss=null){
 		if (!isset($jss)) {
-			$jss=[strtolower($this->controller).'/'.$this->action];
+			$jss=strtolower($this->controller).'/'.$this->action;
 		}		
 		$this->view->addJs($jss);
 	}

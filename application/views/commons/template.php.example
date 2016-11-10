@@ -9,11 +9,11 @@
 
     <title>MVC</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="<?php echo PATH; ?>/css/application.css">
-
+    <link rel="stylesheet" href="<?php echo PATH ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo PATH ?>/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
   	<?php $this->css(); ?>
+    <link rel="stylesheet" href="<?php echo PATH; ?>/css/application.css">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,8 +24,10 @@
   </head>
   <body>
     <?php $this->render_partial($view_name); ?>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://raw.githubusercontent.com/softwarespot/jquery-bootstrap-purr/master/jquery-bootstrap-purr.js"></script>
+
+    <script type="text/javascript" src="<?php echo PATH; ?>/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo PATH; ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo PATH; ?>/bower_components/bootstrap-purr/jquery-bootstrap-purr.min.js"></script>
     <script type="text/javascript"> var PATH ='<?php echo PATH; ?>'; </script>
     <script type="text/javascript" src="<?php echo PATH; ?>/js/application.js"></script>
     <?php $this->js(); ?>	
