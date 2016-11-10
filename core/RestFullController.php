@@ -21,7 +21,7 @@ class RestFullController extends Controller{
 				$this->jsonResponce($result->getErrors(),409);
 			}
 		}catch (Exception $e) {
-		 	http_response_code(400);
+			$this->jsonResponce(['error'=>$e],400);
 		} 
 	}
 	public function all(){

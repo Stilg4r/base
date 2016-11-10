@@ -1,7 +1,12 @@
 <?php
 load_conf('db');
 class CustomModel extends Model{
+	private $purifier;
 	private $errors;
+	function __construct()
+	{
+		$this->purifier = null;
+	}
 	protected function noEmpty($arr){
 		return !(in_array("", $arr));
 	}
@@ -24,22 +29,24 @@ class CustomModel extends Model{
 	public function columns() {
 		return ORM::for_table('')->rawQuery('SHOW COLUMNS FROM '.$this->_get_table_name(get_class($this)));
 	}
-	public static function purify($value) {
-		$config = HTMLPurifier_Config::createDefault();
-		$config->set('Core.Encoding', 'UTF-8');
-		$config->set('HTML.Doctype', 'HTML 4.01 Transitional'); 
-		$config->set('HTML.AllowedElements', '');  
-		$config->set('Attr.AllowedClasses', '');  
-		$config->set('HTML.AllowedAttributes', '');  
-		$config->set('AutoFormat.RemoveEmpty', true);  
-		$purifier = new HTMLPurifier($config);
-		return $purifier->purify($value);
+	public function purify($property,$value) {
+		if (is_null($this->purifier)) {
+			$config = HTMLPurifier_Config::createDefault();
+			$config->set('Core.Encoding', 'UTF-8');
+			$config->set('HTML.Doctype', 'HTML 4.01 Transitional'); 
+			$config->set('HTML.AllowedElements', '');  
+			$config->set('Attr.AllowedClasses', '');  
+			$config->set('HTML.AllowedAttributes', '');  
+			$config->set('AutoFormat.RemoveEmpty', true);  
+			$this->purifier = new HTMLPurifier($config);			
+		}
+		return $this->purifier->purify($value);
 	}
 	public function __set($property, $value) {
-		parent::__set($property,$this->purify($value));
+		parent::__set($property,$this->purify($property,$value));
 	}
 	public function set($key, $value = null) {
-		parent::set($key,$this->purify($value));
+		parent::set($key,$this->purify($key,$value));
 	}
 	public function validateEmail($value){
 		$dns=explode("@",$value);

@@ -14,8 +14,18 @@ $.fn.formToJSON = function() {
 
 	});
 
-	return JSON.stringify(jsonData);
+	//return JSON.stringify(jsonData);
+	return jsonData;
 };
+function diff(original,modified) {
+	var diff={};
+	for (var key in original){
+    	if (original[key] != modified[key]) {
+    		diff[key] = modified[key];
+    	}
+    }
+    return diff;
+}
 function notify(type,message) {	
 	setTimeout(function() {
 		$.bootstrapPurr(message, {
