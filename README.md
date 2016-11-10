@@ -23,6 +23,7 @@ Pequeño framework MVC
 #Instalacion 
 * curl -s https://getcomposer.org/installer | php
 * php composer.phar install
+* bower install 
 * Edit config
 * Edit rotes
 * Edit template

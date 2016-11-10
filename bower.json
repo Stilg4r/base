@@ -1,0 +1,24 @@
+{
+  "name": "Base - Usul",
+  "homepage": "https://github.com/Stilg4r/base",
+  "authors": [
+    "Israel Navarrete <navarrete.alvarado@gmail.com>"
+  ],
+  "description": "Pequeño framework MVC",
+  "main": "",
+  "keywords": [
+    "MVC",
+    "REST"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-purr": "jquery-bootstrap-purr#^1.1.2"
+  }
+}
