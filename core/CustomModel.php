@@ -48,6 +48,10 @@ class CustomModel extends Model{
 	public function set($key, $value = null) {
 		parent::set($key,$this->purify($key,$value));
 	}
+	public function rawSet($key, $value = null)
+	{
+		parent::set($key,$value);
+	}	
 	public function validateEmail($value){
 		$dns=explode("@",$value);
 		if (filter_var($value, FILTER_VALIDATE_EMAIL) and checkdnsrr(array_pop($dns),"MX") ) {
