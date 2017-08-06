@@ -25,9 +25,18 @@ class View extends Application{
 		$path=ROOT . DS .'application' . DS . 'views' . DS . $render_partial . '.php';
 		if( file_exists($path) ) {
 			include ($path);
-		} else {			
+		} else {
     		$trace = debug_backtrace();
 			trigger_error('no existe contenido parcial '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
+		}
+	}
+	function addHelper($helper){
+		$path=ROOT . DS .'application' . DS . 'views' . DS . 'helpers' . DS . $helper . '.php';
+		if( file_exists($path) ) {
+			include ($path);
+		} else {
+    		$trace = debug_backtrace();
+			trigger_error('No existe helper '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
 		}
 	}
 	protected function css(){
@@ -66,7 +75,7 @@ class View extends Application{
 	}
 	private function add2array(&$array,$item) {
 		if (is_array($item)) {
-			$array=$array+$item;
+			$array = array_unique(array_merge($array,$item));
 		}elseif (is_string($item)) {
 			$array[]=$item;
 		}
