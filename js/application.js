@@ -26,7 +26,7 @@ function diff(original,modified) {
     }
     return diff;
 }
-function notify(type,message) {	
+function notify(type,message) {
 	setTimeout(function() {
 		$.bootstrapPurr(message, {
 			element: 'body',
@@ -37,7 +37,7 @@ function notify(type,message) {
 			},
 			align: 'center',
 			width: 'auto',
-			allow_dismiss: true, 
+			allow_dismiss: true,
 			allow_dismiss_type: 'hover',
 			});
 	}, 100);

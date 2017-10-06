@@ -22,19 +22,23 @@ class Router {
 			}
 		}
 		if (!isset($controller)) {
-			$controller='404';
+			if (DEBUG) {error_log("No existe el ".$url." en las rutas");}
+			header('Location: '.PATH.'/404');
+			exit();
 		}
 		$controller_name = $controller;
 		$controller = ucwords($controller);
-		if (DEBUG) {
-			$action=(isset($action))?$action:'';
-			error_log($url.'=>'.$controller_name.'/'.$action); 
-		}	
 		if (class_exists($controller) and method_exists($controller, $action)) {
+			if (DEBUG) {
+				$action=(isset($action))?$action:'';
+				error_log($url.'=>'.$controller_name.'/'.$action);
+			}
 			$dispatch = new $controller($controller_name,$action);
 		 	call_user_func_array([$dispatch,$action],$query_string);
 		}else{
-		   	header('Location: '.PATH.'/404');	
-		}	    
+			if (DEBUG) {error_log("No existe la ".$action." en ".$controller_name);}
+		   	header('Location: '.PATH.'/404');
+		   	exit();
+		}
 	}
 }
