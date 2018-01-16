@@ -1,6 +1,6 @@
 <?php
 class View extends Application{
-	protected $variables = array();
+	protected $vars = [];
 	protected $css=[];
 	protected $js=[];
 	function __construct(){}
@@ -8,10 +8,10 @@ class View extends Application{
 		echo '<input type="hidden" name="CSRFToken" value="'.$this->generateToken($formname).'">';
 	}
 	function set($name,$value) {
-		$this->variables[$name] = $value;
+		$this->vars[$name] = $value;
 	}
 	function render($view_name,$snippet = DEFAULT_TEMPLATE) {
-		extract($this->variables);
+		extract($this->vars);
 		$path=ROOT . DS .'application' . DS . 'views' . DS . $snippet . '.php';
 		if( file_exists($path) ) {
 			include ($path);
@@ -20,23 +20,21 @@ class View extends Application{
 			trigger_error('no existe plantilla '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
 		}
 	}
+	public function setVars($array)
+	{
+		//$this->add2array($this->vars,$array);
+		//$this->vars = $array;
+		//$this->vars = array_unique(array_merge($this->vars,$array));
+		$this->vars = array_merge($this->vars,$array);
+	}
 	function render_partial($render_partial){
-		extract($this->variables);
+		extract($this->vars);
 		$path=ROOT . DS .'application' . DS . 'views' . DS . $render_partial . '.php';
 		if( file_exists($path) ) {
 			include ($path);
 		} else {
     		$trace = debug_backtrace();
 			trigger_error('no existe contenido parcial '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
-		}
-	}
-	function addHelper($helper){
-		$path=ROOT . DS .'application' . DS . 'views' . DS . 'helpers' . DS . $helper . '.php';
-		if( file_exists($path) ) {
-			include ($path);
-		} else {
-    		$trace = debug_backtrace();
-			trigger_error('No existe helper '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
 		}
 	}
 	protected function css(){
@@ -51,7 +49,7 @@ class View extends Application{
 	 		}elseif (preg_match('/^htt(ps|p):\/\/.*\.css$/', $css)) {
 	 			echo '<link rel="stylesheet" href="'.$css.'">';
 	 		}else{
-	 			echo "<!-- No existe el archivo css -->";
+	 			echo "<!-- No existe el archivo css ".$css."-->";
 	 		}
 	 		echo "\r\n";
 	 	}
@@ -68,7 +66,7 @@ class View extends Application{
 	 		}elseif (preg_match('/^htt(ps|p):\/\/.*\.js$/', $js)) {
 	 			echo '<script type="text/javascript" src="'.$js.'"></script>';
 	 		}else{
-	 			echo "<!-- No existe el archivo js -->";
+	 			echo "<!-- No existe el archivo js ".$js." -->";
 	 		}
 	 		echo "\r\n";
 		}

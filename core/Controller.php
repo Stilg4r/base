@@ -11,7 +11,7 @@ class Controller extends Application {
 		$this->view = new View();
 		$this->template = DEFAULT_TEMPLATE;
 	}
-	public function getModel(){
+	protected function getModel(){
         if (property_exists($this->controller, '_model')) {
 			$properties = get_class_vars($this->controller);
 			return $properties['model'];
@@ -47,28 +47,30 @@ class Controller extends Application {
 	}
 	protected function renderView($view_name=null){
 		if (!isset($view_name)) {
-			$view_name = strtolower($this->controller).'/'.$this->action;
+			$view_name = strtolower($this->controller).DS.strtolower($this->action);
 		}
 		$this->view->render($view_name,$this->template);
 	}
 	protected function setVars($vars){
-		foreach($vars as $var => $value) {
-			$this->view->set($var,$value);
-		}
+		$this->view->setVars($vars);
 	}
-	protected function setVar($var,$value){
-		$this->view->set($var,$value);
+	protected function setVar($var,$value = null){
+        if (is_array($var) and is_null($value) ) {
+        	$this->view->setVars($var);
+        }else{
+			$this->view->set($var,$value);
+        }
 	}
 	protected function addCss($csss=null){
 		if (!isset($csss)) {
-			$csss=strtolower($this->controller).'/'.$this->action;
+			$csss=strtolower($this->controller).DS.strtolower($this->action);
 		}
 		$this->view->addCss($csss);
 	}
 	protected function addJs($jss=null){
 		if (!isset($jss)) {
-			$jss=strtolower($this->controller).'/'.$this->action;
-		}		
+			$jss=strtolower($this->controller).DS.strtolower($this->action);
+		}
 		$this->view->addJs($jss);
 	}
 }

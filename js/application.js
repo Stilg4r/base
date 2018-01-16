@@ -20,25 +20,48 @@ $.fn.formToJSON = function() {
 function diff(original,modified) {
 	var diff={};
 	for (var key in original){
-    	if (original[key] != modified[key]) {
+    	if (original[key] != modified[key]  ) {
     		diff[key] = modified[key];
     	}
     }
     return diff;
 }
-function notify(type,message) {	
-	setTimeout(function() {
-		$.bootstrapPurr(message, {
-			element: 'body',
-			type: type,
-			offset: {
-				amount: 0,
-				from: 'top'
+function genSelect2(selector, recuest_url, placeholder = "Selecciona uno"  ) {
+	$(selector).select2({
+	 	placeholder: placeholder,
+	 	allowClear: true,
+	 	cache: true,
+		ajax: {
+			url: PATH+recuest_url,
+			dataType: 'json',
+			data: function (params) {
+				return {
+					term: params.term // search term
+				};
 			},
-			align: 'center',
-			width: 'auto',
-			allow_dismiss: true, 
-			allow_dismiss_type: 'hover',
-			});
-	}, 100);
+			processResults: function (data) {
+				return {
+					results: data
+				};
+			},
+			cache: true
+		},
+	});
+}
+function copy(org, dest) {
+	for (var key in org) {
+  		dest[key](org[key]());
+	}
+}
+ko.observableArray.fn.sortBy = function(property, direction, compare) {
+	direction = direction||'des';
+	compare = compare||function (L, R) {return L > R;};
+    return this.sort(function(l, r) {
+        var L =  l[property]();
+        var R =  r[property]();
+        if (direction == 'asc') {
+            return compare(L, R) ? -1 : 1;
+        }
+        return compare(L, R) ? 1 : -1;
+    });
 };
