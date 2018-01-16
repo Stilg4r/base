@@ -37,6 +37,15 @@ class View extends Application{
 			trigger_error('no existe contenido parcial '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
 		}
 	}
+	function addHelper($helper){
+		$path=ROOT . DS .'application' . DS . 'views' . DS . 'helpers' . DS . $helper . '.php';
+		if( file_exists($path) ) {
+			include ($path);
+		} else {
+    		$trace = debug_backtrace();
+			trigger_error('No existe helper '.$path.' '.$trace[0]['file'].' en la linea '.$trace[0]['line'],E_USER_ERROR);
+		}
+	}
 	protected function css(){
 		require_once(ROOT.DS.'config'.DS.'css_alias.php');
 	 	foreach ($this->css as $css) {

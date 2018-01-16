@@ -41,6 +41,7 @@ class CustomModel extends Model{
 		}else{
 			$f();
 		}
+		
 	}
 	public function columns() {
 		$table = $this::_get_table_name(get_class($this));
