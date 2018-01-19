@@ -18,3 +18,15 @@ ko.bindingHandlers.phone = {
         });
     }
 };
+ko.bindingHandlers.phoneText = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        var valueUnwrapped = ko.unwrap(value)||"";
+        $(element).text(format_phone(valueUnwrapped));
+    },
+    update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        var valueUnwrapped = ko.unwrap(value)||"";
+        $(element).text(format_phone(valueUnwrapped));
+    }
+};

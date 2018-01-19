@@ -28,10 +28,6 @@ class Router {
 		}
 		$controller_name = $controller;
 		$controller = ucwords($controller);
-		if (DEBUG) {
-			$action=(isset($action))?$action:'';
-			error_log($url.'=>'.$controller_name.'/'.$action); 
-		}	
 		if (class_exists($controller) and method_exists($controller, $action)) {
 			if (DEBUG) {
 				$action=(isset($action))?$action:'';

@@ -17,4 +17,15 @@ ko.bindingHandlers.money = {
     }
 };
 
-
+ko.bindingHandlers.moneyText = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        var valueUnwrapped = ko.unwrap(value)||"";
+        $(element).text(format(valueUnwrapped));
+    },
+    update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        var valueUnwrapped = ko.unwrap(value)||"";
+        $(element).text(format(valueUnwrapped));
+    }
+};

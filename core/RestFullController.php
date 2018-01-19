@@ -20,9 +20,6 @@ class RestFullController extends Controller{
 			$result->set($key,$value);
 		}
 		try{
-			foreach ($data as $key => $value) {
-				$result->set($key,$value);
-			}
 			if ($result->save()) {
 				if (!is_null($custom_query)) {
 					$result = $custom_query->findOne($result->id);
